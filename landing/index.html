@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Strobato is an AI SDK for real-time sheet music synchronization."
+    >
+    <title>Strobato | AI SDK for Sheet Music Synchronization</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Strobato home">
+        <span class="brand-mark">S</span>
+        <span>Strobato</span>
+      </a>
+      <nav aria-label="Landing page navigation">
+        <a href="#how">How it works</a>
+        <a href="#sdk">SDK</a>
+        <a href="#status">Status</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">SDK-first music AI</p>
+          <h1>AI SDK for real-time sheet music synchronization</h1>
+          <p class="subheadline">
+            Strobato helps sheet music platforms follow a musician through a
+            MusicXML score and signal the host app when to highlight measures or
+            turn pages.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#sdk">View SDK example</a>
+            <a class="button secondary" href="#" aria-label="GitHub link placeholder">
+              GitHub coming soon
+            </a>
+          </div>
+          <div class="proof-strip" aria-label="Prototype status">
+            <span>MVP working</span>
+            <span>MusicXML first</span>
+            <span>Live piano prototype</span>
+          </div>
+        </div>
+
+        <aside class="demo-card" aria-label="Embedded demo video placeholder">
+          <div class="demo-topbar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="demo-title">Host Sheet Music App</span>
+          </div>
+          <div class="demo-stage">
+            <div class="measure active">
+              <span>Measure 5</span>
+              <strong>G4</strong>
+            </div>
+            <div class="measure">
+              <span>Measure 6</span>
+              <strong>A4</strong>
+            </div>
+            <div class="measure">
+              <span>Measure 7</span>
+              <strong>B4</strong>
+            </div>
+            <div class="measure">
+              <span>Measure 8</span>
+              <strong>C5</strong>
+            </div>
+          </div>
+          <div class="tracking-panel">
+            <div>
+              <span>tracking_status</span>
+              <strong id="tracking-status">locked</strong>
+            </div>
+            <div>
+              <span>confidence_score</span>
+              <strong id="confidence-score">0.83</strong>
+            </div>
+            <div>
+              <span>page_turn_signal</span>
+              <strong id="page-turn-signal">true</strong>
+            </div>
+          </div>
+          <p class="demo-caption">Demo video / GIF placeholder</p>
+        </aside>
+      </section>
+
+      <section class="section" id="how">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2>Invisible infrastructure for host sheet music apps.</h2>
+        </div>
+        <div class="pipeline" aria-label="Audio to host app pipeline">
+          <div class="pipeline-step">microphone / audio</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">pitch detection</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">StrobatoEngine</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">score tracking</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">host app UI</div>
+        </div>
+      </section>
+
+      <section class="section split" id="sdk">
+        <div>
+          <p class="eyebrow">SDK example</p>
+          <h2>Small surface area. Clear output.</h2>
+          <p>
+            Host apps keep control of the UI. Strobato only returns where the
+            musician appears to be, how confident it is, and whether a page turn
+            should happen.
+          </p>
+        </div>
+        <pre class="code-card"><code>from strobato_sdk import StrobatoEngine
+
+engine = StrobatoEngine(measures_per_page=2)
+engine.load_score("score.musicxml")
+
+result = engine.update_with_notes([
+    "C4", "D4", "E4", "F4", "G4"
+])
+
+host_app.highlight(result.current_measure)
+
+if result.page_turn_signal:
+    host_app.turn_page()</code></pre>
+      </section>
+
+      <section class="section cards" id="visual-demo">
+        <article class="info-card">
+          <p class="eyebrow">Visual demo</p>
+          <h2>Replay mode</h2>
+          <p>
+            Replays a known note sequence through the SDK so a viewer can see
+            measures highlight without microphone setup.
+          </p>
+        </article>
+        <article class="info-card">
+          <p class="eyebrow">Experimental</p>
+          <h2>Live mode</h2>
+          <p>
+            Uses microphone input, pitch detection, and note-event compression
+            to update the same host-app style UI from real piano audio.
+          </p>
+        </article>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Why SDK-first</p>
+          <h2>Strobato should disappear inside better music apps.</h2>
+        </div>
+        <p>
+          The business wedge is not another sheet music reader. It is a
+          synchronization layer that platforms like digital score readers,
+          practice tools, and notation apps could integrate without rebuilding
+          their product around Strobato.
+        </p>
+      </section>
+
+      <section class="section status-grid" id="status">
+        <div class="section-heading">
+          <p class="eyebrow">Current status</p>
+          <h2>Founder-built MVP, working end to end.</h2>
+        </div>
+        <div class="status-card">
+          <strong>MVP working</strong>
+          <span>Stateful score follower with current measure inference.</span>
+        </div>
+        <div class="status-card">
+          <strong>MusicXML support</strong>
+          <span>Loads simple scores and builds a reference map.</span>
+        </div>
+        <div class="status-card">
+          <strong>Simulated notes</strong>
+          <span>Stable default path for SDK tests and demos.</span>
+        </div>
+        <div class="status-card">
+          <strong>Experimental live audio</strong>
+          <span>Microphone prototype has tracked a live C major octave.</span>
+        </div>
+      </section>
+
+      <section class="section roadmap" id="roadmap">
+        <div class="section-heading">
+          <p class="eyebrow">Roadmap</p>
+          <h2>Keep the wedge sharp.</h2>
+        </div>
+        <ol>
+          <li>Test one simple non-scale melody with live piano input.</li>
+          <li>Reduce browser demo latency without early visual jumps.</li>
+          <li>Improve noisy-note rejection for real rooms.</li>
+          <li>Expand MusicXML coverage carefully.</li>
+          <li>Evaluate stronger pitch detection and future ML inference.</li>
+        </ol>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div>
+          <p class="eyebrow">Contact / waitlist</p>
+          <h2>Building a sheet music platform?</h2>
+          <p>
+            Strobato is early. If real-time score following would make your app
+            feel smarter, join the waitlist or ask for the demo.
+          </p>
+        </div>
+        <form class="waitlist-form" action="#" method="get">
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com">
+          </label>
+          <button type="submit">Join waitlist</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <span>Strobato</span>
+      <span>SDK-first, MusicXML-first, prototype-stage.</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
