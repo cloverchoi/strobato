@@ -20,6 +20,27 @@ Live microphone input exists as an experimental optional prototype. The core
 SDK API is still built around note windows, so simulated notes and future audio
 input use the same score-following engine.
 
+## Vision
+
+Strobato is intentionally narrow in its first MVP, but the long-term goal is broader real-time music intelligence infrastructure for digital performance and practice tools.
+
+The current SDK focuses on:
+- MusicXML score following
+- measure tracking
+- confidence estimation
+- page-turn signaling
+
+Future directions could include:
+- expressive performance tracking
+- ensemble synchronization
+- rehearsal and practice analytics
+- adaptive accompaniment systems
+- polyphonic and chord-aware tracking
+- real-time collaborative music experiences
+- deeper integrations with digital sheet music ecosystems
+
+The current repository is focused on proving the core score-following loop before expanding into more advanced musical interaction systems.
+
 ## Quick Start
 
 From the repository root:
@@ -268,4 +289,4 @@ Strobato should stay SDK-first:
 - simulated note matching remains the stable default
 - live audio remains optional and experimental
 - beginner-friendly code
-- no overbuilding
+- prove the core score-following loop before expanding scope
