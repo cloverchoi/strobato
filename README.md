@@ -1,6 +1,6 @@
 # Strobato
 
-
+![Strobato Demo](assets/demo.png)
 
 Strobato is an SDK for synchronizing musical performance with digital sheet
 music.
