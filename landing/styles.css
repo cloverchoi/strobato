@@ -523,3 +523,9 @@ footer {
   display: block;
   border-radius: 16px;
 }
+
+.navbar-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
