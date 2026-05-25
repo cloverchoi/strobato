@@ -122,7 +122,7 @@ p {
 }
 
 h1 {
-  max-width: 700px;
+  max-width: 900px;
   margin-bottom: 18px;
   font-size: clamp(48px, 7vw, 82px);
   line-height: 0.94;
